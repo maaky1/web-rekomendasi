@@ -1,0 +1,10 @@
+nltk
+asgiref
+Django
+numpy
+Pillow
+sqlparse
+wheel
+django-import-export
+googletrans==3.1.0a0
+pip

@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block Title %}
+	{{Title}} | {{Title_Web}}
+{% endblock Title %}
+
+
+{% block pageTitle %}
+
+{% endblock pageTitle %}
+
+
+{% block contents %}
+	<center><h2>{{Title_Web}}</h2></center><br>
+
+	{% if counter != 0 %}
+		<center><h5>Terakhir Di Review</h5></center>
+		{% for i in data %}
+	    {% if forloop.first %}
+	    <center>
+	        <tr>
+	    {% endif %}
+			<td>
+				{% for j in i %}			
+					<a href="{% url 'film:details' j.slug %}" style="text-decoration:none; color:inherit;">
+						<img src="{{ j.image.url }}" class="img-thumbnail" style="width: 170px; height: 250px;">
+					</a>	
+				{% endfor %}
+			</td>
+	    {% if forloop.last %}
+	        </tr>
+	    </center>
+	    {% endif %}
+		{% endfor %}
+	{% else %}
+		<center><h5>Terakhir di Review</h5></center>
+		<center><h5>Tidak ada Data</h5></center>
+	{% endif %}
+
+{% endblock contents %}

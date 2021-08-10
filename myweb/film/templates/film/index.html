@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block Title %}
+	{{Title}} | {{Title_Web}}
+{% endblock Title %}
+
+
+{% block pageTitle %}
+	<!-- {{Title_Web}} -->
+{% endblock pageTitle %}
+
+
+{% block contents %}
+	<center><h2>Daftar {{Content}}</h2></center><hr>
+	
+	{% for post in posts %}
+    {% if forloop.first %}
+        <center><tr>
+    {% endif %}
+		<td>
+			<a href="{% url 'film:details' post.slug %}" style="text-decoration:none; color:inherit;">
+			<img src="{{ post.image.url }}" class="img-thumbnail" style="width: 170px; height: 250px;">
+			</a>
+		</td>
+    {% if forloop.last %}
+        </tr></center>
+    {% endif %}
+	{% endfor %}
+
+{% endblock contents %}

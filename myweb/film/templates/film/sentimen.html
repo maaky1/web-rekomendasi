@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block Title %}
+	{{Title}} | {{Title_Web}}
+{% endblock Title %}
+
+
+{% block pageTitle %}
+	{{Title_Web}}
+{% endblock pageTitle %}
+
+
+{% block contents %}
+	{{Content}}
+
+	<br><br>
+	<h2><u>Data Awal</u></h2>
+	{% for i in komen %}
+		<p>
+			{{ i }}
+			<!-- <strong>{{ i.id_film }}</strong>
+			{{ i.komentar }} -->
+		</p>
+	{% endfor %}<br>
+
+	<h2><u>Score Sentimen</u></h2>
+	{% for i in data %}
+		Komentar - {{forloop.counter}}
+		{{ i }}<br>
+	{% endfor %}<br><br>
+
+{% endblock contents %}

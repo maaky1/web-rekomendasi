@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block Title %}
+	{{Title_Web}}
+{% endblock Title %}
+
+
+{% block pageTitle %}
+	<!-- {{Title_Web}} -->
+{% endblock pageTitle %}
+
+
+{% block contents %}
+	
+	<h1>{{ posts.judul_film }}</h1>
+	<img src="{{ posts.image.url }}" class="img-thumbnail" style="width: 200px; height: 290px;">
+	
+	<br><br>
+	<h4><u>Sinopsis Film</h4></u>
+	<p>{{ posts.sinopsis_film }}</p>
+
+	<br><br><br>
+	<h4><u>Review User</h4></u>
+	{% for review in komen %}
+		<strong>{{ review.username }}</strong>
+  		<p>{{ review.komentar }}</p>
+  		<br>
+	{% endfor %}
+	<br>
+	<form method="POST">
+		<div class="form-outline">
+			{% if user.is_authenticated %}
+				{% csrf_token %}
+				<p><strong>Hai {{ user }}</strong></p>
+				<textarea class="form-control" rows="4" name="kolomkomentar" placeholder="Tulis Komentar Disini ..."></textarea>
+				<br>
+				<button type="submit" class="btn btn-primary" style="width: 100px;">Post</button>
+			{% else %}
+				<textarea class="form-control" rows="4" placeholder="Tulis Komentar Disini ..." disabled></textarea>
+				<p>
+					Silahkan <a href="{% url 'loginuser:index' %}" style="color: inherit; text-decoration: none;">Login</a> 
+					Atau <a href="{% url 'loginuser:daftar' %}" style="color: inherit; text-decoration: none;">Daftar</a>
+				</p>
+			{% endif %}
+		</div>
+	</form>
+
+{% endblock contents %}

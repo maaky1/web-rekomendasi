@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+
+{% block Title %}
+	{{Title}} | {{Title_Web}}
+{% endblock Title %}
+
+
+{% block pageTitle %}
+	<!-- {{Title_Web}} -->
+{% endblock pageTitle %}
+
+
+
+{% block contents %}
+	<center><h2>{{Content}}</h2></center><hr>
+
+
+	{% if user.is_authenticated %}
+		{% if feed != 0 %}
+			<div class="row">
+		{% for i in rekomendasi %}
+			<div class="col-md mx-auto mb-3">
+				<div class="card" style="width: 15rem;">
+					<img src="{{ i.image.url }}" class="img-thumbnail" style="width: 100%;">
+					<div class="card-body">
+						<strong>
+							Rank {{forloop.counter}} : 
+						</strong>
+						{{i.judul_film}}
+						<br>
+
+						<strong>
+							Label :
+						</strong>
+						{{i.labelfilm}}
+						<br>
+
+						<strong>
+							Bobot :
+						</strong>
+						{{i.bobottfidf}}
+						<br>
+
+					</div>
+				</div>
+			</div>
+		{% endfor %}
+			</div>
+		{% else %}
+			<center>Silahkan review
+				<a href="{% url 'film:index' %}" style="text-decoration:none; color:inherit;">
+					Film
+				</a>dahulu
+			</center>
+		{% endif %}
+	{% else %}
+		<center>Silahkan login terlebih dahulu</center>
+		<center><span id="countdown">5</span></center>
+	{% endif %}
+
+	<script>
+		var seconds = 6;
+		function countdownlogin(){
+			seconds = seconds - 1;
+			if (seconds == 0){
+				window.location.href = "{% url 'loginuser:index' %}";
+			}
+			else{
+				document.getElementById("countdown").innerHTML = "Anda akan dialihkan dalam "+seconds+" detik";
+				window.setTimeout("countdownlogin()", 1000);
+			}
+		}
+		countdownlogin();
+	</script>
+{% endblock contents %}
